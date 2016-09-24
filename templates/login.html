@@ -1,0 +1,49 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+       
+        <div class="gap"></div>
+        <div class="container">
+            <div class="row" data-gutter="60">
+                <div class="col-md-4">
+                   
+                </div>
+                <div class="col-md-4">
+                    <form  method="post" enctype="multipart/form-data">
+                        <div class="form-group form-group-icon-left"><i class="fa fa-lock input-icon input-icon-show"></i>
+                            <label>Нууц үг</label>
+                            <input class="form-control" type="password" placeholder="my secret password" id="password"/>
+                        </div>
+                        <input id="login" class="btn btn-primary" type="button" value="Нэвтрэх" />
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+{% block scripting %}
+    {{parent()}}
+    <script type="text/javascript">
+        
+        $('#login').click(function(){
+           $.post("login.php", {
+                password: $('#password').val()
+            }, 
+
+            function (result) {
+                var arr = result.split('>');
+                if(arr[1] != 0){
+                    window.location.replace("index.php");
+                }else{
+                    alert("Wrong username password");
+                }
+            });
+        });
+    
+
+    </script>
+{% endblock %}

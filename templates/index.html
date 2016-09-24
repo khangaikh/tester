@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <form id="search">
+                    <aside class="booking-filters booking-filters-white">
+                        <h5 style="padding-left:10px ">Шинэ хэрэглэгч</h5>
+                        <ul class="list booking-filters-list">
+                            <li>
+                                <div class="checkbox">
+                                    <label> Овог нэр : 
+                                        <input  type="text" />
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label> Регистер : 
+                                        <input  type="text" />
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label> Файл
+                                        <input  type="file" />
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input  type="button" class="btn btn-primary" value="Оруулах"  style="width:100%"/>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </aside>
+                </form>
+            </div>
+            <div class="col-md-9">
+                <div class="booking-filters booking-filters-white" style="width: 100%">
+                    <div style="width: 100%; border-bottom: 1px solid #ccc">
+                    <h4 style="padding-left:10px "> {{person.name}}  / Хүйс: {% if person.sex == 'Male' %}Эр{%else%}Эм {% endif %}
+                    / Нас: {{person.age}} / Огноо: {{person.date}}</h4>
+                    </div>
+                    
+                    <div class="list booking-filters-list">
+                        {% set num=0 %}
+                        {%for key1,event in topics%}
+                            <h5 style="padding-left:10px; margin-top: 10px ">{{event.topic}}</h5>
+                            <table width="auto" class="table table-striped table-bordered table-hover" style="margin-left: 10px;">
+                                <thead>
+                                    <tr>
+                                        <th>Шалгах үзүүлэлт</th>
+                                        <th>Хэвийн хэмжээ</th>
+                                        <th>Үр дүн</th>
+                                        <th>Тестийн хариу</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for key,item in event.items%}
+                                        <tr class="odd gradeX">
+                                            <td>{{item}}</td>
+                                            <td>{{measures[num].set1}}</td>
+                                            <td>{{measures[num].set2}}</td>
+                                            <td class="center">
+                                                {% if  'Normal' in measures[num].set3 ==1 %}
+                                                    Энгийн
+                                                {%elseif  'Moderately' in measures[num].set3 ==1 %}
+                                                    Бага гажилттай
+                                                {% elseif  'Mildly' in measures[num].set3 ==1 %}
+                                                    Дунд гажилттай
+
+                                                {% elseif  'Severely' in measures[num].set3 ==1  %}
+                                                    Их гажилттай
+                                                {%else%}
+                                                   {{measures[num].set3}} 
+                                                {%endif%}
+                                                
+                                            </td>
+                                        </tr>
+                                        {% set num=num+1 %}
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        {%endfor%}
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+{% endblock %}
+{% block scripting %}
+{{parent()}}
+    <script type="text/javascript">
+     
+        
+
+        $('#logout').click(function(){
+            alert("Та дахин ирээрэй");
+             $.post("logout.php", {
+                }, function (result) {
+                window.location.href = "index.php";
+            });
+        });
+    </script>
+{% endblock %}
+
+
