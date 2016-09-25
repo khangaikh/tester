@@ -5,29 +5,31 @@
         <br />
         <div class="row">
             <div class="col-md-3">
-                <form id="search">
+                <form id="search" action="add.php" method="POST" enctype="multipart/form-data" class="no-print">
                     <aside class="booking-filters booking-filters-white">
-                        <h5 style="padding-left:10px ">Шинэ хэрэглэгч</h5>
+                        <h5 style="padding-left:10px ">Хөрвүүлэх</h5>
                         <ul class="list booking-filters-list">
                             <li>
-                                <div class="checkbox">
+                                <!--
+                                <div >
                                     <label> Овог нэр : 
-                                        <input  type="text" />
+                                        <input class="form-control" type="text" name="name" required />
                                     </label>
                                 </div>
-                                <div class="checkbox">
+                                <div >
                                     <label> Регистер : 
-                                        <input  type="text" />
+                                        <input class="form-control" type="text" name="register" required/>
                                     </label>
                                 </div>
-                                <div class="checkbox">
+                                -->
+                                <div >
                                     <label> Файл
-                                        <input  type="file" />
+                                        <input class="form-control" type="file" name="import" id="import" required/>
                                     </label>
                                 </div>
-                                <div class="checkbox">
+                                <div >
                                     <label>
-                                        <input  type="button" class="btn btn-primary" value="Оруулах"  style="width:100%"/>
+                                        <input id="make" type="submit" class="btn btn-primary" value="Хөрвүүлэх"  style="width:100%"/>
                                     </label>
                                 </div>
                             </li>
@@ -36,7 +38,7 @@
                 </form>
             </div>
             <div class="col-md-9">
-                <div class="booking-filters booking-filters-white" style="width: 100%">
+                <div id="info" class="booking-filters booking-filters-white" style="width: 100%;">
                     <div style="width: 100%; border-bottom: 1px solid #ccc">
                     <h4 style="padding-left:10px "> {{person.name}}  / Хүйс: {% if person.sex == 'Male' %}Эр{%else%}Эм {% endif %}
                     / Нас: {{person.age}} / Огноо: {{person.date}}</h4>
@@ -93,7 +95,11 @@
 {{parent()}}
     <script type="text/javascript">
      
-        
+        $(document).ready(function() {
+            
+
+           
+        });
 
         $('#logout').click(function(){
             alert("Та дахин ирээрэй");
